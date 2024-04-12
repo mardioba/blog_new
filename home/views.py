@@ -1,5 +1,12 @@
 from django.shortcuts import render, HttpResponse
-
+from post.models import Post, Category
 def index(request):
-  # return HttpResponse("Olá amigos ):")
-  return render(request, 'index.html')
+  post_random = Post.objects.order_by('?')[:4]
+  post_latest = Post.objects.order_by('id')[:3]
+  post_category = Category.objects.order_by('title').all()
+  context = {
+    'post_random': post_random,
+    'post_latest': post_latest,
+    'post_category': post_category
+  }
+  return render(request, 'index.html', context)
