@@ -25,3 +25,6 @@ def blog(request):
     'post_latest': post_latest,
   }
   return render(request, 'pages/blog.html', context)
+def post_detail(request, pk, slug):
+  post = Post.objects.get(id=pk)
+  return render(request, 'pages/post-details.html', {'post': post})

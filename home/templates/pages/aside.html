@@ -16,7 +16,7 @@
           <div class="content">
             <ul>
               {% for item in post_latest %}
-              <li><a href="post-details.html">
+              <li><a href="/post/{{ item.id }}/{{ item.slug }}">
                 <h5>{{ item.title }}</h5>
                 <span>{{ item.updated_at|date:"d/m/Y" }}</span>
               </a></li>
@@ -33,7 +33,7 @@
           <div class="content">
             <ul>
               {% for item in post_category %}
-              <li><a href="#">- {{ item.title }}</a></li>
+              <li><a href="/category/{{ item.id }}/{{ item.slug }}">- {{ item.title }}</a></li>
               {% endfor %}
             </ul>
           </div>
