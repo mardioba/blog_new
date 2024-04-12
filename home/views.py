@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
-from post.models import Post, Category
+from post.models import Post, Category, Comment
+from post.forms import CommentForm
 from django.core.paginator import Paginator
 def index(request):
   post_random = Post.objects.order_by('?')[:4]
@@ -27,4 +28,5 @@ def blog(request):
   return render(request, 'pages/blog.html', context)
 def post_detail(request, pk, slug):
   post = Post.objects.get(id=pk)
-  return render(request, 'pages/post-details.html', {'post': post})
+  comment = Comment.objects.filter(post_id=pk, status='Lido')
+  return render(request, 'pages/post-details.html', {'post': post, 'comments': comment})

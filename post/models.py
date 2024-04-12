@@ -28,3 +28,19 @@ class Post(models.Model):
       return mark_safe('<img src="{}" height="50" />'.format(self.image.url))
     else:
       return mark_safe('<p>Sem imagem</p>')
+  
+class Comment(models.Model):
+  STATUS = (
+    ('Lido', 'Lido'),
+    ('Não Lido', 'Não Lido'),
+    
+  )
+  post = models.ForeignKey(Post, on_delete=models.CASCADE)
+  name = models.CharField(max_length=255, blank=False)
+  comment = models.TextField()
+  status = models.CharField(max_length=10, choices=STATUS, default='Não Lido')
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
+  def __str__(self):
+    return self.name
+  
