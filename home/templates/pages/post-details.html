@@ -22,7 +22,7 @@
                   <ul class="post-info">
                     <li><a href="#">{{post.user.first_name}}</a></li>
                     <li><a href="#">{{post.updated_at|date:"d/m/Y"}}</a></li>
-                    <li><a href="#">10 Comments</a></li>
+                    <li><a href="#">{{ total }} Comments</a></li>
                   </ul>
                   <p>{{post.text|safe}}</p>
                   <div class="post-options">
@@ -40,9 +40,8 @@
               <div class="sidebar-item comments">
                 <div class="sidebar-heading">
                   <h2>
-                    
-                    {% if comments %}
-                    {{ comments|length }} comentários
+                    {% if total > 0 %}
+                    {{ total }} comentários
                     {% else %}
                     Nenhum comentário
                     {% endif %}

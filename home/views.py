@@ -1,7 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from post.models import Post, Category, Comment
 from post.forms import CommentForm
+from home.forms import ContactForm
 from django.core.paginator import Paginator
+from .models import Contact
+
 def index(request):
   post_random = Post.objects.order_by('?')[:4]
   post_latest = Post.objects.order_by('id')[:3]
@@ -29,4 +32,35 @@ def blog(request):
 def post_detail(request, pk, slug):
   post = Post.objects.get(id=pk)
   comment = Comment.objects.filter(post_id=pk, status='Lido')
-  return render(request, 'pages/post-details.html', {'post': post, 'comments': comment})
+  total = 0
+  for item in comment:
+    total += 1
+  context = {
+    'post': post,
+    'comments': comment,
+    'total': total
+    }
+  return render(request, 'pages/post-details.html', context)
+
+def contact(request):
+  if request.method == 'POST':
+    form = ContactForm(request.POST)
+    if form.is_valid():
+      data = Contact()
+      data.name = form.cleaned_data['name']
+      print('Nome:',data.name)
+      data.email = form.cleaned_data['email']
+      data.subject = form.cleaned_data['subject']
+      data.message = form.cleaned_data['message']     
+      data.save()
+      return HttpResponseRedirect('/contact')
+  # else:
+    # print("NÃO VALIDADO")
+  form = CommentForm
+  context = {
+    'form': form
+  }
+  return render(request, 'pages/contact.html', context)
+
+def about(request):
+  return render(request, 'pages/about.html')
