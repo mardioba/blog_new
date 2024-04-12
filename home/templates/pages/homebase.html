@@ -24,29 +24,18 @@
   </head>
 
   <body>
-
 {% block preloader %} {% endblock preloader %}
-
 {% block header %} {% endblock header %}
-
 {% block slide %} {% endblock slide %}
-<div class="blog-posts">
+<section class="blog-posts">
   <div class="container">
     <div class="row">
-      
       {% block content %} {% endblock content %}
-      
       {% block aside %} {% endblock aside %}
-        
-        
     </div>
   </div>
-</div>
-
+</section>
 {% block footer %} {% endblock footer %}
-  
-  
-  
   
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

@@ -9,4 +9,14 @@ def index(request):
     'post_latest': post_latest,
     'post_category': post_category
   }
-  return render(request, 'index.html', context)
+  return render(request, 'pages/index.html', context)
+def blog(request):
+  posts = Post.objects.all()
+  post_latest = Post.objects.order_by('id')[:3]
+  post_category = Category.objects.order_by('title').all()
+  context = {
+    'posts': posts,
+    'post_category': post_category,
+    'post_latest': post_latest
+  }
+  return render(request, 'pages/blog.html', context)

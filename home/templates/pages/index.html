@@ -1,0 +1,16 @@
+{% extends 'pages/homebase.html' %}
+{% load static %}
+{% block preloader %} {% include 'pages/preloader.html' %} {% endblock preloader %}
+{% block header %} {% include 'pages/header.html' %} {% endblock header %}
+{% block slide %} {% include 'pages/slide.html' %} {% endblock slide %}
+<section class="{% block container %} blog-posts {% endblock container %}">
+  <div class="container">
+    <div class="row">
+      {% block content %} {% include 'pages/content.html' %} {% endblock content %}
+
+      {% block aside %} {% include 'pages/aside.html' %} {% endblock aside %}
+    </div>
+  </div>
+</div>
+</section>
+{% block footer %} {% include 'pages/footer.html' %} {% endblock footer %}

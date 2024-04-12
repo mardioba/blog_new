@@ -1,0 +1,61 @@
+{% extends 'pages/homebase.html' %}
+{% load static %}
+{% block preloader %} {% include 'pages/preloader.html' %} {% endblock preloader %}
+{% block header %} {% include 'pages/header.html' %} {% endblock header %}
+{% block slide %} {% include 'pages/slide.html' %} {% endblock slide %}
+<section class="{% block container %} blog-posts {% endblock container %}">
+  <div class="container">
+    <div class="row">
+      {% block content %} 
+                <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                {% for item in posts %}
+                <div class="col-lg-6">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="{{ item.image.url }}" alt="">
+                    </div>
+                    <div class="down-content">
+                      <span>{{ item.category }}</span>
+                      <a href="post-details.html"><h4>{{ item.title }}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{ item.user.first_name }}</a></li>
+                        <li><a href="#">{{ item.created_date|date:"d/m/Y" }}</a></li>
+                        <li><a href="#">26 Comments</a></li>
+                      </ul>
+                      <p>{{ item.description }}</p>
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                              <li><a href="#">Best Templates</a>,</li>
+                              <li><a href="#">TemplateMo</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              <!--  <div class="col-lg-12">
+                  <ul class="page-numbers">
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                  </ul>
+                </div> -->
+              </div>
+            </div>
+          </div>
+      {% endblock content %}
+
+      {% block aside %} {% include 'pages/aside.html' %} {% endblock aside %}
+    </div>
+  </div>
+</div>
+</section>
+{% block footer %} {% include 'pages/footer.html' %} {% endblock footer %}
