@@ -1,0 +1,38 @@
+{% extends 'pages/homebase.html' %}
+{% load static %}
+{% block preloader %} {% include 'pages/preloader.html' %} {% endblock preloader %}
+{% block header %} {% include 'pages/header.html' %} {% endblock header %}
+{% block slide %} {% include 'pages/slide.html' %} {% endblock slide %}
+<section class="{% block container %} blog-posts {% endblock container %}">
+  <div class="container">
+    <div class="row">
+      {% block content %} 
+      <div class="container">
+        <table class="table table-sm table-borderless mx-auto" style="width: auto;">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+          </thead>
+          <tbody>
+            {% for category in categories_with_post_count %}
+            <tr>
+              
+              {% if category.num_posts == 0 %}
+              <th scope="row">{{ category.title }} <span class="badge badge-primary badge-pill">{{ category.num_posts }}</span></th>
+              {% else %}
+              <th scope="row"><a href="/cat_search/{{ item.id }}">{{ category.title }} <span class="badge badge-primary badge-pill">{{ category.num_posts }}</span></a></th>
+                
+              {% endif %}
+                
+            </tr>
+                {% endfor %}
+              </table>
+
+
+      {% endblock content %}
+
+    </div>
+  </div>
+</div>
+</section>
+{% block footer %} {% include 'pages/footer.html' %} {% endblock footer %}

@@ -4,6 +4,7 @@ from post.forms import CommentForm
 from home.forms import ContactForm
 from django.core.paginator import Paginator
 from .models import Contact
+from django.db.models import Count
 
 def index(request):
   post_random = Post.objects.order_by('?')[:4]
@@ -64,3 +65,13 @@ def contact(request):
 
 def about(request):
   return render(request, 'pages/about.html')
+# MELHORIAS
+def cat(request):
+  categories = Category.objects.all()
+  # Anota cada categoria com o número de postagens associadas a ela
+  categories_with_post_count = categories.annotate(num_posts=Count('post'))
+  # return render(request, 'pages/cat.html', {'cat': cat})
+  return render(request, 'pages/cat.html', {'categories_with_post_count': categories_with_post_count})
+def cat_search(request,pk):
+  posts = Post.objects.filter(category_id=pk)
+  return render(request, 'pages/cat_search.html', {'posts': posts})
